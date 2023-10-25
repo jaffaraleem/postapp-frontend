@@ -18,7 +18,7 @@ function Home() {
 
   const fetchSendData = () => {
     axios
-      .get("http://localhost:5000/send_data") // Replace with your Flask API URL
+      .get("http://3.144.31.134:5000/send_data") // Replace with your Flask API URL
       .then((response) => {
         if (response.status === 200) {
           const responseData = response.data;
@@ -31,6 +31,7 @@ function Home() {
 
           // Update the state with the new posts
           setPosts([...posts, ...newPosts]);
+          console.log(posts);
 
           // Handle the received data, e.g., update state
         } else {
@@ -47,16 +48,16 @@ function Home() {
 
     const data = {
       text: postText,
-      author: "Your Name",
+      author: "Jaffar",
       date: new Date().toLocaleString(),
     };
 
-    fetch("http://localhost:5000/post_data", {
+    fetch("http://3.144.31.134:5000/post_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // Include the following header for CORS
-        Origin: "http://localhost:8000",
+        Origin: "http://3.144.31.134",
       },
       body: JSON.stringify(data),
     })
@@ -74,11 +75,7 @@ function Home() {
         console.error(error);
       });
     if (postText) {
-      const newPost = {
-        text: postText,
-        author: "Your Name", // Replace with the actual author
-        date: new Date().toLocaleString(),
-      };
+      const newPost = data;
       setPosts([...posts, newPost]);
       setPostText("");
     }
