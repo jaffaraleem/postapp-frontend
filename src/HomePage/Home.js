@@ -18,7 +18,7 @@ function Home() {
 
   const fetchSendData = () => {
     axios
-      .get("http://localhost:8000/send_data") // Replace with your Flask API URL
+      .get("http://localhost:5000/send_data") // Replace with your Flask API URL
       .then((response) => {
         if (response.status === 200) {
           const responseData = response.data;
@@ -51,7 +51,7 @@ function Home() {
       date: new Date().toLocaleString(),
     };
 
-    fetch("http://localhost:8000/post_data", {
+    fetch("http://localhost:5000/post_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
