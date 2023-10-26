@@ -14,9 +14,6 @@ function Login(props) {
     signInWithPopup(auth, provider)
       .then((result) => {
         props.setUser(result.user.displayName);
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        // const credential = FacebookAuthProvider.credentialFromResult(result);
-        // setUser(result.user.displayName);
         setLoggedIn(true);
         navigate("/home");
       })
