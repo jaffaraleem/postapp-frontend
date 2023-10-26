@@ -19,7 +19,7 @@ function Home(props) {
 
   const fetchSendData = () => {
     axios
-      .get("http://3.144.31.134:5000/send_data") // Replace with your Flask API URL
+      .get("http://3.128.176.88/send_data") // Replace with your Flask API URL
       .then((response) => {
         if (response.status === 200) {
           const responseData = response.data;
@@ -53,12 +53,12 @@ function Home(props) {
       date: new Date().toLocaleString(),
     };
 
-    fetch("http://3.144.31.134:5000/post_data", {
+    fetch("http://3.128.176.88/post_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // Include the following header for CORS
-        Origin: "http://3.144.31.134",
+        Origin: "http://3.128.176.88",
       },
       body: JSON.stringify(data),
     })
