@@ -3,10 +3,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Home() {
+function Home(props) {
   const [postText, setPostText] = useState("");
   const [posts, setPosts] = useState([]);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+  const authorName = props.user;
 
   useEffect(() => {
     // Load initial data when the component is first mounted
@@ -48,7 +49,7 @@ function Home() {
 
     const data = {
       text: postText,
-      author: "Jaffar",
+      author: authorName,
       date: new Date().toLocaleString(),
     };
 
@@ -81,7 +82,7 @@ function Home() {
     }
   };
 
-  return (
+  return props.user ? (
     <div
       style={{
         display: "flex",
@@ -152,6 +153,8 @@ function Home() {
         ))}
       </div>
     </div>
+  ) : (
+    <p>please login by changing url to /login</p>
   );
 }
 

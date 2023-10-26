@@ -4,8 +4,7 @@ import "./login.css";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "./../FirebaseConfig.js";
 
-function Login() {
-  const [user, setUser] = useState("");
+function Login(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate(); // Initialize the history object
 
@@ -14,11 +13,10 @@ function Login() {
     // Set the 'loggedIn' state to true on successful login
     signInWithPopup(auth, provider)
       .then((result) => {
-        setUser(result.user.displayName);
+        props.setUser(result.user.displayName);
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         // const credential = FacebookAuthProvider.credentialFromResult(result);
         // setUser(result.user.displayName);
-        console.log(user);
         setLoggedIn(true);
         navigate("/home");
       })
