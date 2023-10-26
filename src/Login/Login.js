@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import the useHistory hook
 import "./login.css";
-import FacebookLogin from "react-facebook-login";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "./../FirebaseConfig.js";
 
 function Login() {
+  const [user, setUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate(); // Initialize the history object
 
   const handleLogin = () => {
     // Implement your login logic here
     // Set the 'loggedIn' state to true on successful login
-    setLoggedIn(true);
-
-    // Redirect to the /add-post route
-    navigate("/home");
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        setUser(result.user.displayName);
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        // const credential = FacebookAuthProvider.credentialFromResult(result);
+        // setUser(result.user.displayName);
+        console.log(user);
+        setLoggedIn(true);
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
